@@ -10,6 +10,7 @@ AllCops:
     - "vendor/**/*"
 
   DisplayCopNames: true
+  SuggestExtensions: false
 
 Layout/LineLength:
   Max: 120
@@ -26,7 +27,7 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Max: 150
 Metrics/BlockLength:
-  IgnoredMethods: ['describe']
+  Exclude: ['describe']
   Max: 30
 
 Style/Documentation:
