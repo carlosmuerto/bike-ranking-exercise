@@ -12,7 +12,6 @@ require "action_mailbox/engine"
 require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
-require 'active_record/connection_adapters/sqlite3_adapter'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -33,7 +32,7 @@ module BikeRankingExercise
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Change the primary key default type to UUIDs.
-    config.generators do |g|
+    Rails.application.config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
 
