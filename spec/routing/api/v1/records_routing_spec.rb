@@ -6,6 +6,10 @@ RSpec.describe Api::V1::RecordsController, type: :routing do
       expect(get: '/api/v1/records').to route_to('api/v1/records#index')
     end
 
+    it 'routes to #index_with_user' do
+      expect(get: '/api/v1/users/1/records').to route_to('api/v1/records#index_with_user', user_id: '1')
+    end
+
     it 'routes to #show' do
       expect(get: '/api/v1/records/1').to route_to('api/v1/records#show', id: '1')
     end
