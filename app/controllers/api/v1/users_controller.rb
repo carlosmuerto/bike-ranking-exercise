@@ -44,9 +44,9 @@ class Api::V1::UsersController < ApplicationController
     @api_v1_user = Api::V1::User.new(api_v1_user_params)
 
     if @api_v1_user.save
-      render json: @api_v1_user, status: :created, location: @api_v1_user
+      render 'show', status: :created, location: @api_v1_user
     else
-      render json: @api_v1_user.errors, status: :unprocessable_entity
+      render 'errors', status: :unprocessable_entity
     end
   end
 
@@ -57,7 +57,7 @@ class Api::V1::UsersController < ApplicationController
     if @api_v1_user.update(api_v1_user_params)
       render 'show'
     else
-      render json: @api_v1_user.errors, status: :unprocessable_entity
+      render 'errors', status: :unprocessable_entity
     end
   end
 
@@ -65,7 +65,7 @@ class Api::V1::UsersController < ApplicationController
   def destroy
     return unless @api_v1_user == current_user
 
-    p '@api_v1_user.destroy'
+    @api_v1_user.destroy
   end
 
   private
