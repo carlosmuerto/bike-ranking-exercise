@@ -1,12 +1,10 @@
+# rubocop:disable Metrics/BlockLength
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/records', type: :request do
-
   path '/api/v1/records' do
-
     get('list records') do
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -20,7 +18,6 @@ RSpec.describe 'api/v1/records', type: :request do
 
     post('create record') do
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -118,3 +115,5 @@ RSpec.describe 'api/v1/records', type: :request do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength

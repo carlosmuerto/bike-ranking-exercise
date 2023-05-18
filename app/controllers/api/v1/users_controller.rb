@@ -9,8 +9,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   # GET /api/v1/users/1
-  def show
-  end
+  def show; end
 
   # POST /api/v1/users
   def create

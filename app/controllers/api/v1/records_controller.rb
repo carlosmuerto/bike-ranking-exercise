@@ -16,8 +16,7 @@ class Api::V1::RecordsController < ApplicationController
   end
 
   # GET /api/v1/records/1
-  def show
-  end
+  def show; end
 
   # POST /api/v1/records
   def create
