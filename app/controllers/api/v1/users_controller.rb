@@ -4,8 +4,6 @@ class Api::V1::UsersController < ApplicationController
   # GET /api/v1/users
   def index
     @api_v1_users = Api::V1::User.all.page(params[:page])
-
-    render json: @api_v1_users
   end
 
   # GET /api/v1/users/1
