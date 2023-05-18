@@ -29,13 +29,35 @@ components:
         email:
           type: string
           example: scott_wells@test.com
+    Rank:
+      type: object
+      properties:
+        rank:
+          type: integer
+          example: 1
+        travelled_distance:
+          type: number
+          example: 287.27674272098625
+        user:
+          "$ref": "#/components/schemas/User"
 paths:
   "/api/v1/rankings/actual":
     get:
       summary: index_by_actual ranking
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  records:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/Rank"
+                required:
+                - records
   "/api/v1/rankings/{year}/{month}":
     parameters:
     - name: year
@@ -77,14 +99,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  records:
-                    type: array
-                    items:
-                      "$ref": "#/components/schemas/Record"
-                required:
-                - records
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Record"
     post:
       summary: create record
       parameters: []

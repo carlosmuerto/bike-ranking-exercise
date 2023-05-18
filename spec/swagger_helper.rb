@@ -36,6 +36,14 @@ RSpec.configure do |config|
               name: { type: :string, example: 'Scott Wells' },
               email: { type: :string, example: 'scott_wells@test.com' }
             }
+          },
+          Rank: {
+            type: :object,
+            properties: {
+              rank: { type: :integer, example: 1 },
+              travelled_distance: { type: :number, example: 287.27674272098625 },
+              user: { '$ref' => '#/components/schemas/User' }
+            }
           }
         }
       }
