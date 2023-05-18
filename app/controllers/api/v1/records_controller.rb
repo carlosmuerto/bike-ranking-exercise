@@ -3,14 +3,14 @@ class Api::V1::RecordsController < ApplicationController
 
   # GET /api/v1/users/:user_id/records
   def index_with_user
-    @api_v1_records = Api::V1::User.find(params[:user_id]).records
+    @api_v1_records = Api::V1::User.find(params[:user_id]).records.page(params[:page])
 
     render json: @api_v1_records
   end
 
   # GET /api/v1/records
   def index
-    @api_v1_records = Api::V1::Record.all
+    @api_v1_records = Api::V1::Record.all.page(params[:page])
 
     render json: @api_v1_records
   end
