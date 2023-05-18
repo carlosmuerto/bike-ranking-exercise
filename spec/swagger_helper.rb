@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 require 'rails_helper'
 
 RSpec.configure do |config|
@@ -19,7 +20,34 @@ RSpec.configure do |config|
         title: 'API V1',
         version: 'v1'
       },
-      paths: {}
+      components: {
+        schemas: {
+          Record: {
+            type: :object,
+            properties: {
+              id: { type: :string, example: '52df1d2f-3284-4e34-b3fc-daa32f4c41d5' },
+              travelled_distance: { type: :number, example: 287.27674272098625 },
+              created_at: { type: :string, example: '2021-12-13T16:55:40.437Z' }
+            }
+          },
+          User: {
+            type: :object,
+            properties: {
+              id: { type: :string, example: '52df1d2f-3284-4e34-b3fc-daa32f4c41d5' },
+              name: { type: :string, example: 'Scott Wells' },
+              email: { type: :string, example: 'scott_wells@test.com' }
+            }
+          },
+          Rank: {
+            type: :object,
+            properties: {
+              rank: { type: :integer, example: 1 },
+              travelled_distance: { type: :number, example: 287.27674272098625 },
+              user: { '$ref' => '#/components/schemas/User' }
+            }
+          }
+        }
+      }
     }
   }
 
@@ -29,3 +57,5 @@ RSpec.configure do |config|
   # Defaults to json. Accepts ':json' and ':yaml'.
   config.swagger_format = :yaml
 end
+
+# rubocop:enable Metrics/BlockLength
