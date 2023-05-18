@@ -4,6 +4,44 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/rankings/actual":
+    get:
+      summary: index_by_actual ranking
+      responses:
+        '200':
+          description: successful
+  "/api/v1/rankings/{year}/{month}":
+    parameters:
+    - name: year
+      in: path
+      description: year
+      required: true
+      schema:
+        type: string
+    - name: month
+      in: path
+      description: month
+      required: true
+      schema:
+        type: string
+    get:
+      summary: index_by_year_and_month ranking
+      responses:
+        '200':
+          description: successful
+  "/api/v1/rankings/{year}":
+    parameters:
+    - name: year
+      in: path
+      description: year
+      required: true
+      schema:
+        type: string
+    get:
+      summary: index_by_year ranking
+      responses:
+        '200':
+          description: successful
   "/api/v1/records":
     get:
       summary: list records
