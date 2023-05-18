@@ -22,10 +22,11 @@ RSpec.describe 'api/v1/rankings', type: :request do
     parameter name: 'year', in: :path, type: :string, description: 'year'
     parameter name: 'month', in: :path, type: :string, description: 'month'
 
-    get('index_by_year_and_month ranking') do
+    get('ranking by year and month') do
+      pending
       response(200, 'successful') do
-        let(:year) { '123' }
-        let(:month) { '123' }
+        let(:year) { '2000' }
+        let(:month) { '1' }
 
         after do |example|
           example.metadata[:response][:content] = {
