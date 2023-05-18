@@ -59,6 +59,30 @@ jobs:
   rspec:
     name: RSpec
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        database-password:
+          - postgres
+        database-user:
+          - postgres
+        database-host:
+          - localhost
+        database-port:
+          - 5432
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: ${{ matrix.database-user }}
+          POSTGRES_PASSWORD: ${{ matrix.database-password }}
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Check out Git Repository
@@ -84,6 +108,12 @@ jobs:
         run: bundle install
 
       - name: Setup test database
+        env:
+          DATABASE_USER: ${{ matrix.database-user }}
+          DATABASE_PASSWORD: ${{ matrix.database-password }}
+          DATABASE_HOST: ${{ matrix.database-host }}
+          DATABASE_PORT: ${{ matrix.database-port }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
         run: bundle exec rails db:setup
 
       - name: RSpec Report
