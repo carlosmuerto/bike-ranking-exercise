@@ -3,6 +3,20 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 52df1d2f-3284-4e34-b3fc-daa32f4c41d5
+        name:
+          type: string
+          example: Scott Wells
+        email:
+          type: string
+          example: scott_wells@test.com
 paths:
   "/api/v1/rankings/actual":
     get:
@@ -25,7 +39,7 @@ paths:
       schema:
         type: string
     get:
-      summary: index_by_year_and_month ranking
+      summary: ranking by year and month
       responses:
         '200':
           description: successful
@@ -99,12 +113,57 @@ paths:
       summary: list users
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/User"
+                  specialization:
+                    type: string
+                    example: specialization
     post:
       summary: create user
+      parameters: []
       responses:
-        '200':
-          description: successful
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: test
+                    email:
+                      type: string
+                      example: test@test.com
+                    password:
+                      type: string
+                      example: testPassword
+                    password_confirmation:
+                      type: string
+                      example: testPassword
+                  required:
+                  - name
+                  - email
+                  - password
+                  - password_confirmation
+              required:
+              - user
   "/api/v1/users/{id}":
     parameters:
     - name: id
@@ -117,19 +176,148 @@ paths:
       summary: show user
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
     patch:
       summary: update user
+      parameters: []
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: test
+                    email:
+                      type: string
+                      example: test@test.com
+                    password:
+                      type: string
+                      example: testPassword
+                    password_confirmation:
+                      type: string
+                      example: testPassword
+                token:
+                  type: string
+                  example: 123adf123
+              required:
+              - token
+              - user
     put:
       summary: update user
+      parameters: []
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: test
+                    email:
+                      type: string
+                      example: test@test.com
+                    password:
+                      type: string
+                      example: testPassword
+                    password_confirmation:
+                      type: string
+                      example: testPassword
+                token:
+                  type: string
+                  example: 123adf123
+              required:
+              - token
+              - user
     delete:
       summary: delete user
+      parameters: []
+      responses:
+        '204':
+          description: No Content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: 123adf123
+              required:
+              - token
+  "/api/v1/users/login":
+    post:
+      summary: login
+      parameters: []
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      example: test@test.com
+                    password:
+                      type: string
+                      example: testPassword
+                  required:
+                  - email
+                  - password
+              required:
+              - user
+  "/api/v1/users/logout":
+    post:
+      summary: logout
+      parameters: []
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: 123adf123
+              required:
+              - token

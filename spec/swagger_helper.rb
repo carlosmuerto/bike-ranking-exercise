@@ -19,7 +19,18 @@ RSpec.configure do |config|
         title: 'API V1',
         version: 'v1'
       },
-      paths: {}
+      components: {
+        schemas: {
+          User: {
+            type: :object,
+            properties: {
+              id: { type: :string, example: '52df1d2f-3284-4e34-b3fc-daa32f4c41d5' },
+              name: { type: :string, example: 'Scott Wells' },
+              email: { type: :string, example: 'scott_wells@test.com' }
+            }
+          }
+        }
+      }
     }
   }
 
