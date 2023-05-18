@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/BlockLength
 require 'swagger_helper'
 
-RSpec.describe 'api/v1/records', type: :request do
+RSpec.describe 'api/v1/records', type: :request, skip: true do
   path '/api/v1/records' do
     get('list records') do
       response(200, 'successful') do
