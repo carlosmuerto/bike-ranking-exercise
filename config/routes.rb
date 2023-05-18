@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :records, defaults: {format: :json}
       resources :users, defaults: {format: :json} do
+        post '/login', to: 'users#login', on: :collection, defaults: {format: :json}
+        post '/logout', to: 'users#logout', on: :collection, defaults: {format: :json}
+        post '/current_user', to: 'users#current', on: :collection, defaults: {format: :json}
         get '/records', to: 'records#index_with_user', defaults: {format: :json}
       end
     end
