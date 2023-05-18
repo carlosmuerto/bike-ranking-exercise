@@ -17,7 +17,6 @@ class Api::V1::RecordsController < ApplicationController
 
   # GET /api/v1/records/1
   def show
-    render json: @api_v1_record
   end
 
   # POST /api/v1/records

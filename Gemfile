@@ -43,6 +43,11 @@ gem 'rack-cors'
 # for API documentation
 gem 'rswag'
 
+gem 'rabl'
+# Also add either `oj` or `yajl-ruby` as the JSON parser
+# If using `oj`, Rabl will set the mode to :compat
+gem 'oj'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]

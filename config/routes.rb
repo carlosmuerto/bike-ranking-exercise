@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   namespace :api do
     namespace :v1 do
-      resources :records
-      resources :users do
-        get '/records', to: 'records#index_with_user'
+      resources :records, defaults: {format: :json}
+      resources :users, defaults: {format: :json} do
+        get '/records', to: 'records#index_with_user', defaults: {format: :json}
       end
     end
   end
