@@ -1,5 +1,5 @@
 class Api::V1::RecordsController < ApplicationController
-  before_action :set_api_v1_record, only: %i[ show update destroy ]
+  before_action :set_api_v1_record, only: %i[show update destroy]
 
   # GET /api/v1/records
   def index
@@ -39,13 +39,14 @@ class Api::V1::RecordsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_api_v1_record
-      @api_v1_record = Api::V1::Record.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def api_v1_record_params
-      params.require(:api_v1_record).permit(:travelled_distance, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_api_v1_record
+    @api_v1_record = Api::V1::Record.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def api_v1_record_params
+    params.require(:api_v1_record).permit(:travelled_distance, :user_id)
+  end
 end
