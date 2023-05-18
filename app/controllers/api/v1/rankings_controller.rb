@@ -20,6 +20,15 @@ class Api::V1::RankingsController < ApplicationController
     render 'index'
   end
 
+  def index_by_actual
+    start_date = DateTime.now.beginning_of_month
+    end_date = start_date.end_of_month
+
+    set_api_v1_rankings(start_date, end_date)
+
+    render 'index'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
