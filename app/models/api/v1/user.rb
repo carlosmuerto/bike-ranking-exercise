@@ -1,4 +1,6 @@
 class Api::V1::User < ApplicationRecord
+  has_many :records, dependent: :destroy
+  
   before_create :maybe_assign_id
 
   has_secure_password
