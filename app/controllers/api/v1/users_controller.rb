@@ -11,6 +11,36 @@ class Api::V1::UsersController < ApplicationController
   # GET /api/v1/users/1
   def show; end
 
+  # GET /api/v1/users/current_user
+  def current
+    @api_v1_user = current_user
+  end
+
+  # GET /api/v1/users/loguot
+  def logout
+    @api_v1_user = current_user
+    return unless @api_v1_user
+
+    @api_v1_user.token = nil
+    @api_v1_user.save
+    render 'logout' if @api_v1_user
+  end
+
+  # GET /api/v1/users/login
+  def login
+    login_params = params.require(:user).permit(:email, :password)
+    @api_v1_user = Api::V1::User.find_by(email: login_params[:email])
+
+    if @api_v1_user&.authenticate(login_params[:password])
+      # authenticated successfully
+      @api_v1_user.regenerate_token
+      render 'login', status: :ok
+    else
+      # authentication failed
+      render 'login_failed', status: :unauthorized
+    end
+  end
+
   # POST /api/v1/users
   def create
     @api_v1_user = Api::V1::User.new(api_v1_user_params)
@@ -24,8 +54,10 @@ class Api::V1::UsersController < ApplicationController
 
   # PATCH/PUT /api/v1/users/1
   def update
+    return unless @api_v1_user == current_user
+
     if @api_v1_user.update(api_v1_user_params)
-      render json: @api_v1_user
+      render 'show'
     else
       render json: @api_v1_user.errors, status: :unprocessable_entity
     end
@@ -33,10 +65,17 @@ class Api::V1::UsersController < ApplicationController
 
   # DELETE /api/v1/users/1
   def destroy
-    @api_v1_user.destroy
+    return unless @api_v1_user == current_user
+
+    p '@api_v1_user.destroy'
   end
 
   private
+
+  def authenticate_user!
+    # authentication failed
+    render 'login_failed', status: :unauthorized unless @api_v1_user&.authenticate(login_params[:password])
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_api_v1_user
@@ -45,6 +84,6 @@ class Api::V1::UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v1_user_params
-    params.require(:api_v1_user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

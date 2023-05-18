@@ -52,6 +52,6 @@ class Api::V1::RecordsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def api_v1_record_params
-    params.require(:api_v1_record).permit(:travelled_distance, :user_id)
+    params.require(:record).permit(:travelled_distance, :user_id)
   end
 end

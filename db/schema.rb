@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_150859) do
     t.datetime "updated_at", null: false
     t.string "token"
     t.index ["email"], name: "index_api_v1_users_on_email", unique: true
+    t.index ["token"], name: "index_api_v1_users_on_token", unique: true
   end
 
   add_foreign_key "api_v1_records", "api_v1_users", column: "user_id"
