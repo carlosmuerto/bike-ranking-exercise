@@ -1,6 +1,6 @@
 object @api_v1_record => :record
-attributes :id, :travelled_distance, :created_at, :user
+extends 'api/v1/records/_show'
 
 child user: :user do
-  attributes :id, :name, :email
+  extends 'api/v1/users/_show'
 end

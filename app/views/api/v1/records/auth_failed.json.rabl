@@ -1,0 +1,1 @@
+node(:error) { 'Invalid token' }
