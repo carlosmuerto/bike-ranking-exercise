@@ -4,6 +4,58 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/records":
+    get:
+      summary: list records
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create record
+      responses:
+        '200':
+          description: successful
+  "/api/v1/records/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show record
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update record
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update record
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete record
+      responses:
+        '200':
+          description: successful
+  "/api/v1/users/{user_id}/records":
+    parameters:
+    - name: user_id
+      in: path
+      description: user_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: index_with_user record
+      responses:
+        '200':
+          description: successful
   "/api/v1/users":
     get:
       summary: list users
