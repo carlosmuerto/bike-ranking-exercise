@@ -18,7 +18,7 @@ names = [
   "Ivan",
   "Jenny",
   "Kevin",
-  "lazy",
+  "Lazy",
   "Mallory",
   "Nancy",
   "Oscar",
@@ -42,18 +42,35 @@ names.each do |name|
     password: "#{name}password"
   })
 
-  entries = rand(1..11)
+  
 
-  entries = unless name == "lazy"
+  entries = rand(2..101)
+
+  entries = unless name == "Lazy"
     rand(10)
   else
     0
   end
 
   entries.times do |i|
-    Api::V1::Record.create({
+    record = Api::V1::Record.new({
       travelled_distance: rand(1.0..500.0),
       user: user
     })
+
+    record.created_at = rand((DateTime.now - 2.years)..DateTime.now) # set a specific created_at timestamp
+
+    record.save
+  end
+
+  if name == "Lazy"
+    record = Api::V1::Record.new({
+      travelled_distance: 1.0,
+      user: user
+    })
+
+    record.created_at = rand((DateTime.now - 2.years)..DateTime.now) # set a specific created_at timestamp
+
+    record.save
   end
 end
