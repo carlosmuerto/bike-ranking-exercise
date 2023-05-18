@@ -21,6 +21,14 @@ RSpec.configure do |config|
       },
       components: {
         schemas: {
+          Record: {
+            type: :object,
+            properties: {
+              id: { type: :string, example: '52df1d2f-3284-4e34-b3fc-daa32f4c41d5' },
+              travelled_distance: { type: :number, example: 287.27674272098625 },
+              created_at: { type: :string, example: '2021-12-13T16:55:40.437Z' }
+            }
+          },
           User: {
             type: :object,
             properties: {

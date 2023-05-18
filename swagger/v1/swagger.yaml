@@ -5,6 +5,18 @@ info:
   version: v1
 components:
   schemas:
+    Record:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 52df1d2f-3284-4e34-b3fc-daa32f4c41d5
+        travelled_distance:
+          type: number
+          example: 287.27674272098625
+        created_at:
+          type: string
+          example: '2021-12-13T16:55:40.437Z'
     User:
       type: object
       properties:
@@ -61,12 +73,48 @@ paths:
       summary: list records
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  records:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/Record"
+                required:
+                - records
     post:
       summary: create record
+      parameters: []
       responses:
-        '200':
-          description: successful
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                record:
+                  type: object
+                  properties:
+                    travelled_distance:
+                      type: number
+                      example: 287.27674272098625
+                  required:
+                  - travelled_distance
+                token:
+                  type: string
+                  example: 123adf123
+              required:
+              - record
+              - token
   "/api/v1/records/{id}":
     parameters:
     - name: id
@@ -79,22 +127,88 @@ paths:
       summary: show record
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Record"
     patch:
       summary: update record
+      parameters: []
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Record"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                record:
+                  type: object
+                  properties:
+                    travelled_distance:
+                      type: number
+                      example: 287.27674272098625
+                  required:
+                  - travelled_distance
+                token:
+                  type: string
+                  example: 123adf123
+              required:
+              - record
+              - token
     put:
       summary: update record
+      parameters: []
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Record"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                record:
+                  type: object
+                  properties:
+                    travelled_distance:
+                      type: number
+                      example: 287.27674272098625
+                  required:
+                  - travelled_distance
+                token:
+                  type: string
+                  example: 123adf123
+              required:
+              - record
+              - token
     delete:
       summary: delete record
+      parameters: []
       responses:
-        '200':
-          description: successful
+        '204':
+          description: No Content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: 123adf123
+              required:
+              - token
   "/api/v1/users/{user_id}/records":
     parameters:
     - name: user_id
@@ -107,7 +221,18 @@ paths:
       summary: index_with_user record
       responses:
         '200':
-          description: successful
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  records:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/Record"
+                required:
+                - records
   "/api/v1/users":
     get:
       summary: list users
@@ -122,7 +247,7 @@ paths:
                   users:
                     type: array
                     items:
-                      "$ref": "#/components/schemas/User"
+                      "$ref": "#/components/schemas/Record"
                   specialization:
                     type: string
                     example: specialization

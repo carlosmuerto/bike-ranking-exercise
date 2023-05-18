@@ -36,7 +36,7 @@ RSpec.describe 'api/v1/users', type: :request do
           {
             type: :object,
             properties: {
-              users: { type: :array, items: { '$ref' => '#/components/schemas/User' } },
+              users: { type: :array, items: { '$ref' => '#/components/schemas/Record' } },
               specialization: { type: :string, example: 'specialization' }
             }
           }
@@ -292,15 +292,5 @@ RSpec.describe 'api/v1/users', type: :request do
     end
   end
 end
-
-
-
-
-# it do
-#   p '########################################################'
-#   p request
-#   p request.body.string
-#   p '########################################################'
-# end
 
 # rubocop:enable Metrics/BlockLength
