@@ -215,7 +215,6 @@ RSpec.describe 'api/v1/users', type: :request do
   end
 
   path '/api/v1/users/login' do
-
     post('login') do
       consumes 'application/json'
       produces 'application/json'
@@ -258,12 +257,10 @@ RSpec.describe 'api/v1/users', type: :request do
 
         run_test!
       end
-
     end
   end
 
   path '/api/v1/users/logout' do
-
     post('logout') do
       consumes 'application/json'
       produces 'application/json'

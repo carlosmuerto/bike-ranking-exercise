@@ -48,10 +48,10 @@ RSpec.describe 'api/v1/rankings', type: :request do
 
         let(:year) { '2000' }
         let(:month) { '1' }
-  
+
         response 200, 'OK' do
           schema type: :array, items: { '$ref' => '#/components/schemas/Rank' }
-  
+
           run_test!
         end
       end
@@ -67,10 +67,10 @@ RSpec.describe 'api/v1/rankings', type: :request do
         produces 'application/json'
 
         let(:year) { '2000' }
-  
+
         response 200, 'OK' do
           schema type: :array, items: { '$ref' => '#/components/schemas/Rank' }
-  
+
           run_test!
         end
       end

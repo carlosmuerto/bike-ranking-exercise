@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::User, type: :model do
-
   # Test validations
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:email) }
