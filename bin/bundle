@@ -9,7 +9,7 @@
 #
 
 require "rubygems"
-
+Fs
 m = Module.new do
   module_function
 
