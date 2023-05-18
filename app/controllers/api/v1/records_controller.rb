@@ -1,6 +1,15 @@
 class Api::V1::RecordsController < ApplicationController
   before_action :set_api_v1_record, only: %i[show update destroy]
 
+
+
+  # GET /api/v1/users/:user_id/records
+  def index_with_user
+    @api_v1_records = Api::V1::User.find(params[:user_id]).records
+
+    render json: @api_v1_records
+  end
+
   # GET /api/v1/records
   def index
     @api_v1_records = Api::V1::Record.all
